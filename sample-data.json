@@ -1,11 +1,12 @@
 {
-  "time": 1670245063307,
+  "time": 1670247531916,
   "blocks": [
     {
       "id": "HW5xpJz574",
       "type": "header",
       "data": {
-        "text": "Something inspirational"
+        "text": "Something inspirational",
+        "level": 2
       }
     },
     {
@@ -16,5 +17,5 @@
       }
     }
   ],
-  "version": "2.26.0"
+  "version": "2.26.1"
 }
