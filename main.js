@@ -1,7 +1,8 @@
 import './style.css';
 import sampleData from './sample-data.json';
 import EditorJS from '@editorjs/editorjs';
-import header from './editor/tools/header';
+
+import tools from './editor/tools';
 
 const outputTo = document.querySelector('#output code');
 const renderOutput = async function (api) {
@@ -12,9 +13,7 @@ const renderOutput = async function (api) {
 const editor = new EditorJS({
   holder: 'editorjs',
 
-  tools: {
-    header,
-  },
+  tools,
 
   placeholder: "Write something inspirational...",
   data: sampleData,
