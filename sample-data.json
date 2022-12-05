@@ -1,0 +1,20 @@
+{
+  "time": 1670245063307,
+  "blocks": [
+    {
+      "id": "HW5xpJz574",
+      "type": "header",
+      "data": {
+        "text": "Something inspirational"
+      }
+    },
+    {
+      "id": "HW5xpJz577",
+      "type": "paragraph",
+      "data": {
+        "text": "Something inspirational"
+      }
+    }
+  ],
+  "version": "2.26.0"
+}
