@@ -1,8 +1,11 @@
 import './style.css';
-import sampleData from './sample-data.json';
+
 import EditorJS from '@editorjs/editorjs';
 
 import tools from './editor/tools';
+
+import markdown from './__fixtures__/service-standard.md?raw';
+import loadMarkdown from './editor/loadMarkdown';
 
 const outputTo = document.querySelector('#output code');
 const renderOutput = async function (api) {
@@ -17,9 +20,13 @@ const editor = new EditorJS({
 
   placeholder: "Write something inspirational...",
   autofocus: true,
-  data: sampleData,
+  data: {},
 
   onChange: renderOutput,
+
+  onReady: () => {
+    loadMarkdown({ editor, markdown });
+  },
 });
 
 // For live debugging in browser console
