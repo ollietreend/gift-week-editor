@@ -16,7 +16,20 @@ const editor = new EditorJS({
   tools,
 
   placeholder: "Write something inspirational...",
+  autofocus: true,
   data: sampleData,
 
   onChange: renderOutput,
 });
+
+// For live debugging in browser console
+window.editor = editor;
+
+const currentBlockTo = document.querySelector('#current-block');
+const updateCurrentBlock = () => {
+  const current = editor.blocks.getCurrentBlockIndex();
+  currentBlockTo.innerText = current;
+};
+
+document.addEventListener("keydown", updateCurrentBlock);
+document.addEventListener("mousedown", updateCurrentBlock);
