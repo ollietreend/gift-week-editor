@@ -18,7 +18,7 @@ import chaiSubset from 'chai-subset';
 chai.use(chaiSubset);
 
 // Import helpful commands
-import './commands'
+import './commands';
 
 // Go to the test page before each test
 beforeEach(() => {

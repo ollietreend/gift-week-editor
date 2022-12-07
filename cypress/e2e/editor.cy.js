@@ -1,3 +1,5 @@
+import theredoc from 'theredoc';
+
 describe('Editor', () => {
   it('can be initialised', () => {
     cy.createEditor();
@@ -42,7 +44,7 @@ describe('Editor', () => {
         ],
       },
       {
-        markdown: `
+        markdown: theredoc`
 ## Heading 2
 
 A paragraph of text.

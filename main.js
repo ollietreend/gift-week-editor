@@ -1,13 +1,14 @@
 import createEditor from './editor/editor';
-import markdown from './__fixtures__/service-standard.md?raw';
+import exportMarkdown from './editor/exportMarkdown';
+import markdown from './__fixtures__/headings-and-paragraphs.md?raw';
 
 /**
  * Live output of EditorJS data
  */
 const outputTo = document.querySelector('#output code');
-const renderOutput = async function (api) {
+const renderOutput = async (api) => {
   const data = await api.saver.save();
-  outputTo.innerText = JSON.stringify(data, null, 2);
+  outputTo.innerText = await exportMarkdown(data);
 }
 
 const editor = createEditor({

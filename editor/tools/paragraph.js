@@ -1,5 +1,19 @@
 import Paragraph from "@editorjs/paragraph";
 
+import { unified } from 'unified';
+import rehypeParse from 'rehype-parse';
+import rehypeRemark from 'rehype-remark';
+import remarkStringify from 'remark-stringify';
+
+const htmlToMarkdown = async (html) => {
+  const parser = unified()
+    .use(rehypeParse)
+    .use(rehypeRemark)
+    .use(remarkStringify);
+  const vfile = await parser().process(html);
+  return vfile.value.trim();
+}
+
 /**
  * List of Markdown to Block transformations
  */
@@ -59,6 +73,11 @@ class MarkdownParagraph extends Paragraph {
 
     // Set focus to the new block, which now has the same index as this block originally had.
     this.api.caret.setToBlock(currentBlockIndex, 'start');
+  }
+
+  static async toMarkdown(data) {
+    // Paragraph text may contain HTML for inline elements (e.g. links and formatting)
+    return htmlToMarkdown(data.text);
   }
 }
 
