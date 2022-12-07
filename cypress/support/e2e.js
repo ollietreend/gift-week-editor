@@ -13,8 +13,14 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
+// Add chai-subset assertions
+import chaiSubset from 'chai-subset';
+chai.use(chaiSubset);
+
+// Import helpful commands
 import './commands'
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+// Go to the test page before each test
+beforeEach(() => {
+  cy.visit('cypress/fixtures/test.html');
+});

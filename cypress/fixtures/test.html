@@ -10,9 +10,13 @@
 
 <body>
   <div id="editorjs"></div>
-  <div id="output"><code></code></div>
-  <div id="current-block"></div>
-  <script type="module" src="/main.js"></script>
+  <script type="module">
+    import createEditor from '../../editor/editor';
+
+    // Make createEditor available globally so editor instances can be
+    // created dynamically by cypress
+    window.createEditor = createEditor;
+  </script>
 </body>
 
 </html>
