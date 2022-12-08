@@ -1,32 +1,45 @@
 import { createEditor, getMarkdown } from './editor/editor';
-import exportMarkdown from './editor/exportMarkdown';
-import markdown from './__fixtures__/headings-and-paragraphs.md?raw';
+
+const importButton = document.getElementById('import-button');
+const importDialog = document.getElementById('import-dialog');
+const importTextarea = document.getElementById('import-textarea');
+
+const exportButton = document.getElementById('export-button');
+const exportDialog = document.getElementById('export-dialog');
+const exportTextarea = document.getElementById('export-textarea');
+
+const resetButton = document.getElementById('reset-button');
+
+let editor = createEditor();
 
 /**
- * Live output of EditorJS data
+ * Import
  */
-const outputTo = document.querySelector('#output code');
-const renderOutput = async (api) => {
-  const data = await api.saver.save();
-  outputTo.innerText = await exportMarkdown(data);
-}
-
-const editor = createEditor({
-  onChange: renderOutput,
-  markdown,
+importButton.addEventListener('click', () => {
+  importDialog.showModal();
 });
 
-// For live debugging in the browser console
-window.editor = editor;
-window.getMarkdown = () => (getMarkdown(editor));
+importDialog.addEventListener('close', () => {
+  const markdown = importTextarea.value;
+  importTextarea.value = "";
+  if (markdown) {
+    editor.destroy();
+    editor = createEditor({ markdown });
+  }
+});
 
 /**
- * Show the current block index
+ * Export
  */
-const currentBlockTo = document.querySelector('#current-block');
-const updateCurrentBlock = () => {
-  const current = editor.blocks.getCurrentBlockIndex();
-  currentBlockTo.innerText = current;
-};
-document.addEventListener("keydown", updateCurrentBlock);
-document.addEventListener("mousedown", updateCurrentBlock);
+exportButton.addEventListener('click', async () => {
+  exportDialog.showModal();
+  exportTextarea.value = await getMarkdown(editor);
+});
+
+/**
+ * Reset
+ */
+resetButton.addEventListener('click', () => {
+  editor.destroy();
+  editor = createEditor();
+});
