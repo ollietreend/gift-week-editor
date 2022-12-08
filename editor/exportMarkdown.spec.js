@@ -142,4 +142,29 @@ describe('Exporting Blocks as Markdown', () => {
       });
     });
   });
+
+  describe('Table', () => {
+    it('converts Tables', async () => {
+      const block = {
+        type: "table",
+        data: {
+          withHeadings: true,
+          content: [
+            ["Number", "Name"],
+            ["1", "One"],
+            ["2", "Two"],
+          ],
+        },
+      };
+
+      const markdown = theredoc`
+        | Number | Name |
+        | --- | --- |
+        | 1 | One |
+        | 2 | Two |
+      `;
+
+      expect(await convertBlock(block)).toEqual(markdown);
+    });
+  });
 });

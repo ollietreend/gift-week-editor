@@ -44,4 +44,49 @@ describe('Loading Markdown into the Editor', () => {
 
     expect(mockEditor.blocks.renderFromHTML).toHaveBeenCalledWith(expectHTML);
   });
+
+  it('converts tables', async () => {
+    const markdown = theredoc`
+      ## Example with a table
+
+      | Number | Word  |
+      | ------ | ----- |
+      | 1      | One   |
+      | 2      | Two   |
+      | 3      | Three |
+    `;
+
+    const expectHTML = theredoc`
+      <h2>Example with a table</h2>
+      <table>
+      <thead>
+      <tr>
+      <th>Number</th>
+      <th>Word</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>1</td>
+      <td>One</td>
+      </tr>
+      <tr>
+      <td>2</td>
+      <td>Two</td>
+      </tr>
+      <tr>
+      <td>3</td>
+      <td>Three</td>
+      </tr>
+      </tbody>
+      </table>
+    `;
+
+    await loadMarkdown({
+      markdown,
+      editor: mockEditor,
+    });
+
+    expect(mockEditor.blocks.renderFromHTML).toHaveBeenCalledWith(expectHTML);
+  });
 });
