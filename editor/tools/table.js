@@ -29,6 +29,49 @@ class ExportableTable extends Table {
 
     return lines.join("\n");
   }
+
+  static get pasteConfig() {
+    return {
+      tags: [
+        {
+          table: true,
+          thead: true,
+          tbody: true,
+          tr: true,
+          th: true,
+          td: true,
+        }
+      ]
+    }
+  }
+
+  onPaste(event) {
+    const table = event.detail.data;
+    this.data.content = this.getTableContent(table);
+    this.data.withHeadings = true;
+    this.updateTable();
+  }
+
+  getTableContent(table) {
+    const rows = table.querySelectorAll("tr");
+    return Array.from(rows).map((row) => {
+      const cells = row.querySelectorAll("th, td");
+      return Array.from(cells).map((cell) => (cell.innerText));
+    });
+  }
+
+  updateTable() {
+    // First we need to delete all rows/columns in the table
+    // Because table.resize() assumes there are 0
+    while (this.table.numberOfRows > 0) {
+      this.table.deleteRow(1);
+    }
+
+    // Then populate it with the new data
+    this.table.resize();
+    this.table.fill();
+    this.table.setHeadingsSetting(this.data.withHeadings);
+  }
 }
 
 export default {

@@ -82,6 +82,38 @@ describe('Editor', () => {
           }
         ],
       },
+      {
+        markdown: theredoc`
+          ## A document with a table
+
+          | Number | Name |
+          | --- | --- |
+          | 1 | One |
+          | 2 | Two |
+          | 3 | Three |
+        `,
+        expectBlocks: [
+          {
+            type: "header",
+            data: {
+              "text": "A document with a table",
+              "level": 2
+            }
+          },
+          {
+            type: "table",
+            data: {
+              withHeadings: true,
+              content: [
+                ["Number", "Name"],
+                ["1", "One"],
+                ["2", "Two"],
+                ["3", "Three"],
+              ],
+            },
+          },
+        ],
+      },
     ].forEach((example, index) => {
       describe(`Example #${index}`, () => {
         it(`renders Editor Blocks`, () => {
