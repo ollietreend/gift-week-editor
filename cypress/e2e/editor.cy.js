@@ -7,7 +7,7 @@ describe('Editor', () => {
     cy.get('[data-placeholder="Write something inspirational..."]');
   });
 
-  describe('converting Markdown to Editor Blocks', () => {
+  describe('converting between Markdown and Editor Blocks', () => {
     [
       {
         markdown: "## Hello world",
@@ -45,13 +45,13 @@ describe('Editor', () => {
       },
       {
         markdown: theredoc`
-## Heading 2
+          ## Heading 2
 
-A paragraph of text.
+          A paragraph of text, including **bold text**.
 
-### Heading 3
+          ### Heading 3
 
-Some more text [with links](https://example.com) embedded.
+          Some more text [with links](https://example.com) embedded.
         `,
         expectBlocks: [
           {
@@ -64,7 +64,7 @@ Some more text [with links](https://example.com) embedded.
           {
             type: "paragraph",
             data: {
-              text: "A paragraph of text."
+              text: "A paragraph of text, including <b>bold text</b>."
             }
           },
           {
@@ -83,13 +83,24 @@ Some more text [with links](https://example.com) embedded.
         ],
       },
     ].forEach((example, index) => {
-      it(`renders example #${index}`, () => {
-        const { markdown, expectBlocks } = example;
-        cy.createEditor({ markdown }).then(async (editor) => {
-          const data = await editor.save();
-          expect(data).to.containSubset({
-            blocks: expectBlocks
+      describe(`Example #${index}`, () => {
+        it(`renders Editor Blocks`, () => {
+          const { markdown, expectBlocks } = example;
+          cy.createEditor({ markdown }).then(async (editor) => {
+            const data = await editor.save();
+            expect(data).to.containSubset({
+              blocks: expectBlocks
+            });
           });
+        });
+
+        it(`exports the Blocks back to Markdown`, () => {
+          const { markdown } = example;
+          cy.createEditor({ markdown })
+            .then((editor) => (cy.getMarkdown(editor)))
+            .then((output) => {
+              expect(output).to.equal(markdown);
+            });
         });
       });
     });

@@ -29,7 +29,7 @@ describe('Loading Markdown into the Editor', () => {
     const expectHTML = theredoc`
       <h2>Heading 2</h2>
       <p>A paragraph of text.</p>
-      <p>A paragraph with <strong>bold text</strong> and <a href="https://example.com">embedded links</a>.</p>
+      <p>A paragraph with <b>bold text</b> and <a href="https://example.com">embedded links</a>.</p>
       <ol>
       <li>List item one</li>
       <li>List item two</li>

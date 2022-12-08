@@ -1,4 +1,4 @@
-import createEditor from './editor/editor';
+import { createEditor, getMarkdown } from './editor/editor';
 import exportMarkdown from './editor/exportMarkdown';
 import markdown from './__fixtures__/headings-and-paragraphs.md?raw';
 
@@ -18,6 +18,7 @@ const editor = createEditor({
 
 // For live debugging in the browser console
 window.editor = editor;
+window.getMarkdown = () => (getMarkdown(editor));
 
 /**
  * Show the current block index

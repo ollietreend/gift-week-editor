@@ -51,3 +51,13 @@ Cypress.Commands.add('createEditor', (config = {}) => {
       });
     });
 });
+
+/**
+ * Get Markdown output from an Editor.js instance
+ */
+Cypress.Commands.add('getMarkdown', (editor) => {
+  return cy.window()
+    .then((window) => {
+      return window.getMarkdown(editor);
+    });
+});

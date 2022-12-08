@@ -1,6 +1,7 @@
 import EditorJS from '@editorjs/editorjs';
 import tools from './tools';
 import loadMarkdown from './loadMarkdown';
+import exportMarkdown from './exportMarkdown';
 
 const DEFAULT_CONFIG = {
   holder: 'editorjs',
@@ -26,4 +27,10 @@ const createEditor = (config = {}) => {
   return editor;
 };
 
-export default createEditor;
+const getMarkdown = async (editor) => {
+  const data = await editor.save();
+  const markdown = await exportMarkdown(data);
+  return markdown;
+};
+
+export { createEditor, getMarkdown };
