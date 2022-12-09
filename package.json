@@ -21,9 +21,12 @@
   "dependencies": {
     "@editorjs/editorjs": "^2.26.2",
     "@editorjs/header": "^2.7.0",
+    "@editorjs/image": "^2.7.1",
     "@editorjs/list": "^1.8.0",
     "@editorjs/paragraph": "^2.9.0",
     "@editorjs/table": "^2.1.2",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
     "rehype-parse": "^8.0.4",
     "rehype-remark": "^9.1.2",
     "rehype-stringify": "^9.0.3",
@@ -31,6 +34,7 @@
     "remark-parse": "^10.0.1",
     "remark-rehype": "^10.1.0",
     "remark-stringify": "^10.0.2",
+    "serverless-http": "^3.1.0",
     "unified": "^10.1.2"
   }
 }

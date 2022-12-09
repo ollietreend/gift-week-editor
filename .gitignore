@@ -25,3 +25,6 @@ dist-ssr
 
 # Cypress test artifacts
 /cypress/videos/
+
+# Local Netlify folder
+.netlify

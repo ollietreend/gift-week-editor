@@ -1,0 +1,9 @@
+# Netlify configuration
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+publish = "dist"
+command = "npm run build"
+
+[functions]
+directory = "functions"
