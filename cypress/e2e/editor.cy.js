@@ -114,6 +114,69 @@ describe('Editor', () => {
           },
         ],
       },
+      {
+        markdown: theredoc`
+          There are 8 planets in our solar system:
+
+          1. Mercury
+          2. Venus
+          3. Earth (that's where we live)
+          4. Mars
+          5. Jupiter
+          6. Saturn
+          7. Uranus
+          8. Neptune
+
+          If you want to visit a planet, you're going to need:
+
+          - A space ship
+          - Enough fuel to get you there
+          - Lots of money
+          - A space suit
+        `,
+        expectBlocks: [
+          {
+            type: "paragraph",
+            data: {
+              text: "There are 8 planets in our solar system:"
+            }
+          },
+          {
+            type: "list",
+            data: {
+              style: "ordered",
+              items: [
+                "Mercury",
+                "Venus",
+                "Earth (that's where we live)",
+                "Mars",
+                "Jupiter",
+                "Saturn",
+                "Uranus",
+                "Neptune"
+              ]
+            }
+          },
+          {
+            type: "paragraph",
+            data: {
+              text: "If you want to visit a planet, you're going to need:"
+            }
+          },
+          {
+            type: "list",
+            data: {
+              style: "unordered",
+              items: [
+                "A space ship",
+                "Enough fuel to get you there",
+                "Lots of money",
+                "A space suit"
+              ]
+            }
+          }
+        ],
+      }
     ].forEach((example, index) => {
       describe(`Example #${index}`, () => {
         it(`renders Editor Blocks`, () => {
