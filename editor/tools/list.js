@@ -9,14 +9,6 @@ class ExportableList extends List {
     };
     return items.map(format[style]).join("\n");
   }
-
-  // Override the default pasteConfig to fix bug
-  // https://github.com/codex-team/editor.js/issues/2208
-  static get pasteConfig() {
-    return {
-      tags: ['ul', 'ol', 'li'],
-    }
-  }
 }
 
 export default {
