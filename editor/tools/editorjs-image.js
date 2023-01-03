@@ -1,6 +1,13 @@
 import ImageTool from "@editorjs/image";
 
 class ExportableImage extends ImageTool {
+  static get toolbox() {
+    return {
+      ...super.toolbox,
+      title: 'Editor.js Image'
+    };
+  }
+
   static toMarkdown(data) {
     let url = data.file.url;
 
