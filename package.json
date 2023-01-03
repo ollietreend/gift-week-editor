@@ -11,6 +11,8 @@
     "cypress:open": "cypress open"
   },
   "devDependencies": {
+    "@codexteam/ajax": "^4.2.0",
+    "@codexteam/icons": "^0.2.0",
     "@sveltejs/vite-plugin-svelte": "^2.0.2",
     "chai-subset": "^1.6.0",
     "cypress": "^12.0.0",
@@ -26,6 +28,7 @@
     "@editorjs/list": "^1.8.0",
     "@editorjs/paragraph": "^2.9.0",
     "@editorjs/table": "^2.1.2",
+    "cropperjs": "^1.5.13",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
     "rehype-parse": "^8.0.4",
