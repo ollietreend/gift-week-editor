@@ -37,18 +37,19 @@
 
   let caption, file, state, src;
 
+  const imageNeedsCropping = async (file) => {
+    if (file.type == 'image/svg+xml') return false;
+    const dimensions = await getImageDimensions(file);
+    return !isTargetSize(dimensions);
+  };
+
   $: {
     if (!file) {
       state = 'empty';
     } else {
       state = 'checking_dimensions';
-
-      getImageDimensions(file).then((dimensions) => {
-        if (isTargetSize(dimensions)) {
-          state = 'correct_size';
-        } else {
-          state = 'needs_cropping';
-        }
+      imageNeedsCropping(file).then((crop) => {
+        state = crop ? 'needs_cropping' : 'correct_size';
       });
     }
   }
