@@ -30,10 +30,15 @@
     return width == TARGET_WIDTH && height == TARGET_HEIGHT;
   };
 
-  export const data = () => ({
+  export const getData = () => ({
     caption: caption ?? null,
     file: state == 'correct_size' ? file : null,
   });
+
+  export const setData = (data) => {
+    if (data.file) file = data.file;
+    if (data.caption) caption = data.caption;
+  };
 
   let caption, file, state, src;
 
