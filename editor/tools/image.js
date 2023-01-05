@@ -42,12 +42,17 @@ class Image {
   save() {
     const data = this.app.getData();
     return {
+      file: data.file ? 'example.jpg' : null,
       caption: data.caption,
     };
   }
 
+  validate(data) {
+    return (data.file && data.caption);
+  }
+
   static toMarkdown(data) {
-    return `![${data.caption ?? ''}](example.jpg)`;
+    return `![${data.caption ?? ''}](${data.file})`;
   }
 
   static get pasteConfig() {
