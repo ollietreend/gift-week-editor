@@ -17,6 +17,11 @@ class ExportableImage extends ImageTool {
 
     return `![${data.caption}](${url})`;
   }
+
+  // Disable paste functionality
+  static get pasteConfig() {
+    return {};
+  }
 }
 
 export default {

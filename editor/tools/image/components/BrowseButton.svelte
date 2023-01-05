@@ -1,12 +1,13 @@
 <script>
   import ajax from '@codexteam/ajax';
   import { IconPicture } from '@codexteam/icons';
+  import { ALLOWED_TYPES } from '../../image';
 
   export let file;
 
   const browse = async () => {
     const files = await ajax.selectFiles({
-      accept: 'image/png, image/jpeg, image/gif, image/svg+xml',
+      accept: ALLOWED_TYPES.join(', '),
       multiple: false,
     });
     file = files[0];
