@@ -53,6 +53,17 @@ Cypress.Commands.add('createEditor', (config = {}) => {
 });
 
 /**
+ * Add a block to the editor
+ *
+ * @param type - the block type to select (e.g. "Image")
+ */
+Cypress.Commands.add('addBlock', (type) => {
+  cy.get('.ce-block:last-child').click();
+  cy.get('.ce-toolbar__plus').click();
+  cy.get('.ce-toolbox').contains(type).click();
+});
+
+/**
  * Get Markdown output from an Editor.js instance
  */
 Cypress.Commands.add('getMarkdown', (editor) => {
@@ -60,4 +71,11 @@ Cypress.Commands.add('getMarkdown', (editor) => {
     .then((window) => {
       return window.getMarkdown(editor);
     });
+});
+
+/**
+ * Get an <input> by its placeholder
+ */
+Cypress.Commands.add('placeholder', (value) => {
+  return cy.get(`input[placeholder="${CSS.escape(value)}"]`);
 });

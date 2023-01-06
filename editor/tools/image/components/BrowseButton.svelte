@@ -3,23 +3,28 @@
   import { IconPicture } from '@codexteam/icons';
   import { ALLOWED_TYPES } from '../../image';
 
-  export let file;
+  const accept = ALLOWED_TYPES.join(', ');
 
-  const browse = async () => {
-    const files = await ajax.selectFiles({
-      accept: ALLOWED_TYPES.join(', '),
-      multiple: false,
-    });
-    file = files[0];
-  };
+  let files;
+  export let file;
+  $: if (files?.length > 0) file = files[0];
 </script>
 
-<div class="cdx-button" on:click={browse}>
+<label class="cdx-button">
   {@html IconPicture}
   Select an Image
-</div>
+  <input type="file" {accept} bind:files />
+</label>
 
 <style>
+  input {
+    display: none;
+  }
+
+  label {
+    font-weight: normal;
+  }
+
   .cdx-button {
     display: flex;
     align-items: center;
