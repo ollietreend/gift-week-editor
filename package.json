@@ -13,10 +13,10 @@
   "devDependencies": {
     "chai-subset": "^1.6.0",
     "cypress": "^12.0.0",
-    "jsdom": "^20.0.3",
+    "jsdom": "^21.0.0",
     "theredoc": "^1.0.0",
     "vite": "^4.0.4",
-    "vitest": "^0.26.3"
+    "vitest": "^0.27.1"
   },
   "dependencies": {
     "@editorjs/editorjs": "^2.26.3",
