@@ -36,15 +36,10 @@ Cypress.Commands.add('createEditor', (config = {}) => {
     .then((window) => {
       return new Promise((resolve) => {
         const editorContainer = window.document.createElement('div');
-
         editorContainer.setAttribute('id', 'editorjs');
         editorContainer.dataset.cy = 'editorjs';
-        editorContainer.style.border = '1px dotted #388AE5';
-
         window.document.body.appendChild(editorContainer);
-
         const editorInstance = window.createEditor(config);
-
         editorInstance.isReady.then(() => {
           resolve(editorInstance);
         });
@@ -61,6 +56,14 @@ Cypress.Commands.add('addBlock', (type) => {
   cy.get('.ce-block:last-child').click();
   cy.get('.ce-toolbar__plus').click();
   cy.get('.ce-toolbox').contains(type).click();
+  return cy.lastBlock();
+});
+
+/**
+ * Get the last block
+ */
+Cypress.Commands.add('lastBlock', (type) => {
+  return cy.get('.ce-block:last-child');
 });
 
 /**

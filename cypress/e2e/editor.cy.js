@@ -200,4 +200,63 @@ describe('Editor', () => {
       });
     });
   });
+
+  describe('transforming Markdown syntax to Blocks', () => {
+    [
+      {
+        type: "## Hello",
+        expectBlocks: [{
+          type: "header",
+          data: {
+            text: "Hello",
+            level: 2,
+          },
+        }],
+      },
+      {
+        type: "Hello{moveToStart}## ",
+        expectBlocks: [{
+          type: "header",
+          data: {
+            text: "Hello",
+            level: 2,
+          },
+        }],
+      },
+      {
+        type: "- Bread{enter}Milk{enter}Eggs",
+        expectBlocks: [{
+          type: "list",
+          data: {
+            items: ["Bread", "Milk", "Eggs"],
+            style: "unordered",
+          },
+        }],
+      },
+      {
+        type: "1. One{enter}Two{enter}Three",
+        expectBlocks: [{
+          type: "list",
+          data: {
+            items: ["One", "Two", "Three"],
+            style: "ordered",
+          },
+        }],
+      },
+    ].forEach((example, index) => {
+      it(example.type, () => {
+        const editor = cy.createEditor();
+
+        cy.lastBlock().type(example.type, { delay: 50 });
+
+
+        editor.then(e => e.save()).then((data) => {
+          expect(data.blocks).to.have.lengthOf(example.expectBlocks.length);
+          expect(data).to.containSubset({
+            blocks: example.expectBlocks,
+          });
+        });
+      });
+    });
+  });
 });
