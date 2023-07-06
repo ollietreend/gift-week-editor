@@ -40,7 +40,7 @@
     if (data.caption) caption = data.caption;
   };
 
-  let caption, file, state, src;
+  let caption, file, state, src, originalFile;
 
   const imageNeedsCropping = async (file) => {
     if (file.type == 'image/svg+xml') return false;
@@ -51,7 +51,8 @@
   $: {
     if (!file) {
       state = 'empty';
-    } else {
+    } else if (file !== originalFile) {
+      originalFile = file;
       state = 'checking_dimensions';
       imageNeedsCropping(file).then((crop) => {
         state = crop ? 'needs_cropping' : 'correct_size';
